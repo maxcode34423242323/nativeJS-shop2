@@ -1,0 +1,26 @@
+const calc =(size, material, options, promocode, result) => {
+    const sizeBlock = document.querySelector(size),
+        materialBlock = document.querySelector(material),
+        optionBlock = document.querySelector(options),
+        promocodeBlock = document.querySelector(promocode),
+        resultBlock = document.querySelector(result);
+
+    let sum = 0;
+
+    const calcFunc = () => {
+        sum = Math.round((+sizeBlock.value) * (+materialBlock.value) + (+optionBlock.value));
+        if(sizeBlock.value == '' || materialBlock.value == ''){
+            resultBlock.textContent = 'Пожалуйста, введите данные';
+        } else if (promocodeBlock.value === 'WANT'){
+            resultBlock.textContent = Math.round(sum * 0.7) + ' руб.';
+        } else {
+            resultBlock.textContent = sum + ' руб.';
+        }
+    };
+
+    sizeBlock.addEventListener('change', calcFunc);
+    materialBlock.addEventListener('change', calcFunc);
+    optionBlock.addEventListener('change', calcFunc);
+    promocodeBlock.addEventListener('input', calcFunc);
+};
+export default calc;
